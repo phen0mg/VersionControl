@@ -21,6 +21,7 @@ namespace UserMaintenance
 
             txtLastName.Text = Resource1.FullName;
             btnAdd.Text = Resource1.Add;
+            btnWrite.Text = Resource1.Write;
             listUsers.DataSource = users;
             listUsers.ValueMember = "ID";
             listUsers.DisplayMember = "FullName";
@@ -31,5 +32,9 @@ namespace UserMaintenance
             users.Add(u);
         }
 
+        private void btnWrite_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
