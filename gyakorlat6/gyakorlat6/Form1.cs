@@ -16,6 +16,10 @@ namespace gyakorlat6
         public Form1()
         {
             InitializeComponent();
+            GetExchangeRates();
+        }
+        public void GetExchangeRates()
+        {
             var mnbService = new MNBArfolyamServiceSoapClient();
 
             var request = new GetExchangeRatesRequestBody()
