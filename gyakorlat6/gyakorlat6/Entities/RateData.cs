@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,5 +9,9 @@ namespace gyakorlat6.Entities
 {
     class RateData
     {
+        public DateTime date { get; set; }
+        public string Currency { get; set; }
+        public decimal Value { get; set; }
+        public BindingList<RateData> Rates;
     }
 }
