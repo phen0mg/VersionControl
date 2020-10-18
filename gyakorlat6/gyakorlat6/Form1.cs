@@ -17,14 +17,16 @@ namespace gyakorlat6
     public partial class Form1 : Form
     {
         public BindingList<RateData> Rates = new BindingList<RateData>();
+        public BindingList<string> Currencies = new BindingList<string>();
 
         public Form1()
         {
             InitializeComponent();
-            GetExchangeRates();
+            RefreshData();
         }
-        public void GetExchangeRates()
+        public void RefreshData()
         {
+            this.Rates.Clear();
             var mnbService = new MNBArfolyamServiceSoapClient();
 
             var request = new GetExchangeRatesRequestBody()
@@ -38,7 +40,7 @@ namespace gyakorlat6
 
             var result = response.GetExchangeRatesResult;
         }
-        public void XML(string result)
+        private void XML(string result)
         {
             var xml = new XmlDocument();
             xml.LoadXml(result);
@@ -78,6 +80,21 @@ namespace gyakorlat6
             chartArea.AxisY.MajorGrid.Enabled = false;
             chartArea.AxisY.IsStartedFromZero = false;
 
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
 }
