@@ -23,6 +23,7 @@ namespace gyakorlat6
         {
             InitializeComponent();
             RefreshData();
+            dataGridView1.DataSource = Rates;
         }
         public void RefreshData()
         {
