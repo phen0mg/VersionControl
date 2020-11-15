@@ -1,4 +1,5 @@
-﻿using gyak8_cr9zjy.Entities;
+﻿using gyak8_cr9zjy.Abstractions;
+using gyak8_cr9zjy.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,17 +15,21 @@ namespace gyak8_cr9zjy
     public partial class Form1 : Form
     {
         private List<Toy> _toys = new List<Toy>();
+        private Toy _nextToy;
 
         private IToyFactory _factory;
         public IToyFactory Factory
         {
             get { return _factory; }
-            set { _factory = value; }
+            set {
+                _factory = value;
+                DisplayNext();
+            }
         }
         public Form1()
         {
             InitializeComponent();
-            Factory = new IToyFactory();
+            Factory = new BallFactory();
         }
 
         private void createTimer_Tick(object sender, EventArgs e)
@@ -51,6 +56,25 @@ namespace gyak8_cr9zjy
                 mainPanel.Controls.Remove(oldestToy);
                 _toys.Remove(oldestToy);
             }
+        }
+
+        private void btnSelectCar_Click(object sender, EventArgs e)
+        {
+            Factory = new CarFactory();
+        }
+
+        private void btnSelectBall_Click(object sender, EventArgs e)
+        {
+            Factory = new BallFactory();
+        }
+        private void DisplayNext()
+        {
+            if (_nextToy != null)
+                Controls.Remove(_nextToy);
+            _nextToy = Factory.CreateNew();
+            _nextToy.Top = lblNext.Top + lblNext.Height + 20;
+            _nextToy.Left = lblNext.Left;
+            Controls.Add(_nextToy);
         }
     }
 }
